@@ -192,6 +192,9 @@ function _resetForm( survey, options = {} ) {
 
             form = new Form( formEl, {
                 modelStr: formData.modelStr,
+                // If set the defaultInstanceStr will contain defaults passed in from the url.
+                // There will be no value for the instanceID element and enketo will generate a new uuid.
+                instanceStr: formData.defaultInstanceStr,
                 external: survey.externalData,
             }, formOptions );
 
