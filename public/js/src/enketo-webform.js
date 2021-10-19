@@ -195,10 +195,13 @@ function _init( formParts ) {
     const formFragment = range.createContextualFragment( formParts.form );
     formheader.after( formFragment );
     const formEl = document.querySelector( 'form.or' );
+    const instanceStr = _prepareInstance( formParts.model, settings.defaults );
+    const defaultInstanceStr = instanceStr && instanceStr.replace(/<instanceID>.*<\/instanceID>/i, '<instanceID/>');
 
     return controller.init( formEl, {
         modelStr: formParts.model,
-        instanceStr: _prepareInstance( formParts.model, settings.defaults ),
+        instanceStr: instanceStr,
+        defaultInstanceStr: defaultInstanceStr,
         external: formParts.externalData,
         survey: formParts,
     } )
