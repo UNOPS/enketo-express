@@ -114,7 +114,7 @@ function init( formEl, data, loadErrors = [] ) {
             if ( loadErrors.length > 0 ) {
                 throw loadErrors;
             }
-
+            form.view.html.dispatchEvent( events.FormInitialized() );
             return form;
         } );
 }
@@ -680,9 +680,13 @@ function _setEventHandlers( survey ) {
     } );
 
     if ( inIframe() && settings.parentWindowOrigin ) {
-        document.addEventListener( events.SubmissionSuccess().type, postEventAsMessageToParentWindow );
-        document.addEventListener( events.Edited().type, postEventAsMessageToParentWindow );
-        document.addEventListener( events.Close().type, postEventAsMessageToParentWindow );
+        Object.keys(events).forEach( eventName => {
+            document.addEventListener( events[eventName]().type, postEventAsMessageToParentWindow );
+        })
+        // document.addEventListener( events.SubmissionSuccess().type, postEventAsMessageToParentWindow );
+        // document.addEventListener( events.Edited().type, postEventAsMessageToParentWindow );
+        // document.addEventListener( events.Close().type, postEventAsMessageToParentWindow );
+        window.addEventListener('message', processMessageFromParentWindow, false);
     }
 
     document.addEventListener( events.QueueSubmissionSuccess().type, event => {
@@ -758,9 +762,36 @@ function postEventAsMessageToParentWindow( event ) {
     }
 }
 
+/**
+ * Handles messages from parent window
+ *
+ * @param {*} message
+ */
+function processMessageFromParentWindow( message ) {
+    const { data: payload } = message;
+    const { type, content } = payload;
+
+    switch (type) {
+        case 'setfields':
+            $(function () {
+                Object.keys(content).forEach(fieldName => {
+                    const input = $(`input[name="${fieldName}"]`);
+                    const inputField = input[0] || input
+                    if(inputField) {
+                        inputField.value = decodeURIComponent(content[fieldName]);
+                    }
+                });
+            });
+            break;
+        default:
+            break;
+    }
+}
+
 export default {
     init,
     setLogoutLinkVisibility,
     inIframe,
-    postEventAsMessageToParentWindow
+    postEventAsMessageToParentWindow,
+    processMessageFromParentWindow
 };
