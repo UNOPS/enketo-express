@@ -773,14 +773,11 @@ function processMessageFromParentWindow( message ) {
 
     switch (type) {
         case 'setfields':
-            $(function () {
-                Object.keys(content).forEach(fieldName => {
-                    const input = $(`input[name="${fieldName}"]`);
-                    const inputField = input.length ? input[0] : input;
-                    if(inputField) {
-                        form.input.setVal(inputField, decodeURIComponent(content[fieldName]));
-                        inputField.dispatchEvent(events.Change());
-                    }
+            Object.keys(content).forEach(fieldName => {
+                const inputs = document.getElementsByName(fieldName);
+                inputs.forEach(inputElement => {
+                    form.input.setVal(inputElement, decodeURIComponent(content[fieldName]));
+                    inputElement.dispatchEvent(events.Change());
                 });
             });
             break;
