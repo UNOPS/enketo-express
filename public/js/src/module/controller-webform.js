@@ -778,7 +778,8 @@ function processMessageFromParentWindow( message ) {
                     const input = $(`input[name="${fieldName}"]`);
                     const inputField = input[0] || input
                     if(inputField) {
-                        inputField.value = decodeURIComponent(content[fieldName]);
+                        // inputField.value = decodeURIComponent(content[fieldName]);
+                        form.input.setVal(inputField, decodeURIComponent(content[fieldName]));
                     }
                 });
             });
