@@ -2,6 +2,28 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[3.1.0] - 2022-02-18
+---------------------
+
+##### Changed
+
+- [#391](https://github.com/enketo/enketo-express/pull/391) Add Enketo version (release tag, or git commit hash, or package.json version) to User-Agent header to server-sent requests
+
+[3.0.5] - 2022-02-08
+---------------------
+
+##### Changed
+
+- [#373](https://github.com/enketo/enketo-express/pull/373) Fix: not all signature images are uploaded in offline-capable forms
+- [#380](https://github.com/enketo/enketo-express/pull/380) Fix: ensure form_logo.png is included when present in media mapping
+- [#230](https://github.com/enketo/enketo-express/pull/230) Clearer recommendation phrasing in English translation for loading errors
+- [#382](https://github.com/enketo/enketo-express/pulls/382) Update offline script version at build time
+- Upgraded to [enketo-core 6.0.4](https://github.com/enketo/enketo-core/blob/master/CHANGELOG.md#604---2022-02-04)
+- Upgraded to [enketo-transformer 2.1.2](https://github.com/enketo/enketo-transformer/blob/master/CHANGELOG.md#212---2022-02-01)
+- Upgraded to [openrosa-xpath-evaluator 2.0.10](https://github.com/enketo/openrosa-xpath-evaluator/blob/master/CHANGELOG.md#2010---2022-02-01)
+- [#379](https://github.com/enketo/enketo-express/pull/379) Switch from Travis CI to GitHub Actions CI
+- [#375](https://github.com/enketo/enketo-express/pull/375) Add codecov reporting
+
 [3.0.4] - 2021-11-04
 ---------------------
 ##### Changed
@@ -12,6 +34,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [#348](https://github.com/enketo/enketo-express/pull/348) Escaped form ID when requesting form list
 - [#360](https://github.com/enketo/enketo-express/pull/360) Ensure dynamic manifest URLs are mapped by
 - [#351](https://github.com/enketo/enketo-express/issues/351) Fix query parameters not passed to form resources
+
+[3.0.3] - 2021-10-21
+---------------------
+##### Fixed
+- [#345](https://github.com/enketo/enketo-express/pull/345) Restore population of deprecatedID in edit mode
 
 [3.0.2] - 2021-10-20
 ---------------------
